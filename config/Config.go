@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
 
 	"gopkg.in/yaml.v2"
 )
@@ -31,7 +30,9 @@ func (config Config) showConfig() {
 	println("loadConfig:" + string(configStr))
 }
 
-func loadConfigApp(path string) *Config {
+var CONFIG *Config
+
+func LoadConfigApp(path string) {
 	var config Config
 	yamlFile, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -43,8 +44,5 @@ func loadConfigApp(path string) *Config {
 		fmt.Printf("failed to unmarshal : %s\n", path)
 	}
 	config.showConfig()
-
-	return &config
+	CONFIG = &config
 }
-
-var CONFIG = loadConfigApp(os.Args[1])

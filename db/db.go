@@ -8,14 +8,14 @@ import (
 	"github.com/sharelin-linpeng/easyRun/config"
 )
 
-var DB *sqlx.DB = initMySQL()
+var DB *sqlx.DB
 
-func initMySQL() *sqlx.DB {
+func InitMySQL() {
 	db, err := sqlx.Open("mysql", config.CONFIG.App.MySql)
 	if err != nil {
 		fmt.Printf("connect server failed, err:%v\n", err)
 	}
 	db.SetMaxOpenConns(200)
 	db.SetMaxIdleConns(10)
-	return db
+	DB = db
 }
