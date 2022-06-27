@@ -1,10 +1,10 @@
 package config
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 
+	"github.com/sharelin-linpeng/easyRun/jsonutil"
 	"gopkg.in/yaml.v2"
 )
 
@@ -26,8 +26,7 @@ type Config struct {
 }
 
 func (config Config) showConfig() {
-	configStr, _ := json.Marshal(config)
-	println("loadConfig:" + string(configStr))
+	println("loadConfig:" + jsonutil.Obj2Json(config))
 }
 
 var CONFIG *Config
