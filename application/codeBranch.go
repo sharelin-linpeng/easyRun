@@ -19,6 +19,8 @@ type CodeBranch struct {
 	Dir string `db:"dir" json:"dir"`
 	// 构建命令
 	Commond string `db:"commond" json:"commond"`
+	// 本地仓库路径
+	RepoLocal string `db:"repo_local" json:"repoLocal"`
 }
 
 type codeBranchService struct {
@@ -26,7 +28,7 @@ type codeBranchService struct {
 
 // 查询列表
 func (codeBranchService) QueryList() []CodeBranch {
-	sqlStr := "SELECT id, branch_name, git_url,branch,dir,commond FROM code_branch"
+	sqlStr := "SELECT id, branch_name, git_url,branch,dir,commond,repo_local FROM code_branch"
 
 	var codeBranch []CodeBranch
 	if err := db.DB.Select(&codeBranch, sqlStr); err != nil {
@@ -37,7 +39,7 @@ func (codeBranchService) QueryList() []CodeBranch {
 
 // 根据ID查询
 func (codeBranchService) QueryById(id string) *CodeBranch {
-	sqlStr := "SELECT id, branch_name, git_url,branch,dir,commond FROM code_branch where id = ?"
+	sqlStr := "SELECT id, branch_name, git_url,branch,dir,commond,repo_local FROM code_branch where id = ?"
 
 	var codeBranch CodeBranch
 	if err := db.DB.Get(&codeBranch, sqlStr, id); err != nil {
@@ -49,16 +51,16 @@ func (codeBranchService) QueryById(id string) *CodeBranch {
 
 // 根据ID查询
 func (codeBranchService) Add(codeBranch CodeBranch) {
-	sqlStr := "INSERT INTO code_branch(id, branch_name, git_url,branch,dir,commond) VALUE( ?, ?, ?, ?, ?,?)"
-	if _, err := db.DB.Exec(sqlStr, codeBranch.Id, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond); err != nil {
+	sqlStr := "INSERT INTO code_branch(id, branch_name, git_url,branch,dir,commond,repo_local) VALUE( ?, ?, ?, ?, ?, ?, ?)"
+	if _, err := db.DB.Exec(sqlStr, codeBranch.Id, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal); err != nil {
 		fmt.Printf("codeBranchService.Add(), err:%v\n", err)
 	}
 }
 
 // 更新
 func (codeBranchService) Update(codeBranch CodeBranch) {
-	sqlStr := "UPDATE  code_branch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?  WHERE id = ?"
-	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.Id); err != nil {
+	sqlStr := "UPDATE  code_branch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?, repo_local=?  WHERE id = ?"
+	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.Id); err != nil {
 		fmt.Printf("codeBranchService.Update(), err:%v\n", err)
 	}
 }
