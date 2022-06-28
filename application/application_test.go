@@ -23,14 +23,14 @@ func TestApplicationInsert(t *testing.T) {
 func TestApplicationQueryId(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
-	app := ApplicationService.QueryById("123")
+	app, _ := ApplicationService.QueryById("123")
 	fmt.Println(jsonutil.Obj2Json(app))
 }
 
 func TestApplicationQueryList(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
-	applist := ApplicationService.QueryList()
+	applist, _ := ApplicationService.QueryList()
 	fmt.Println(jsonutil.Obj2Json(applist))
 }
 
