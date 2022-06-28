@@ -6,15 +6,10 @@ import (
 	"github.com/sharelin-linpeng/easyRun/application"
 )
 
-type ExecTask interface {
-	process() error
-}
-
 // 更新代码任务
 type UpdateCodeTask struct {
 	codeBranch *application.CodeBranch
 }
-
 func NewUpdateCodeTask(codeBranch *application.CodeBranch) *UpdateCodeTask {
 	task := UpdateCodeTask{codeBranch}
 	return &task

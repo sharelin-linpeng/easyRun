@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "987c5255-3aaf-468e-bd64-47edaa1cebea",
+		"name": "easyRun",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "新增 应用",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "param",
+							"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8888/application/add"
+			},
+			"response": []
+		}
+	]
+}

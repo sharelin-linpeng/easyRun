@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+type ExecTask interface {
+	process() error
+}
+
 type taskExecutor struct {
 	tasks chan ExecTask
 	quit  chan int

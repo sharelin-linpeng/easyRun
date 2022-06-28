@@ -13,7 +13,7 @@ func Obj2Json(obj interface{}) string {
 	return string(str)
 }
 
-func Json2Obj(jsonStr string, obj *interface{}) {
+func Json2Obj(jsonStr string, obj interface{}) {
 	if err := json.Unmarshal([]byte(jsonStr), obj); err != nil {
 		fmt.Printf("json2Obj acc err %v\n", err)
 	}
