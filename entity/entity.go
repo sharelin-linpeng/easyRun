@@ -7,7 +7,17 @@ type Application struct {
 	AppFile     string `db:"app_file" json:"appFile" form:"appFile" binding:"required"`
 }
 
+type STATUS int
+
+const (
+	CODE_BRANCH_NOT_INIT STATUS = iota
+	CODE_BRANCH_OK
+	CODE_BRANCH_REFRESH
+	CODE_BRANCH_BUILD
+)
+
 type CodeBranch struct {
+
 	// ID
 	Id string `db:"id" json:"id" form:"id" binding:"required"`
 	// 分支名称
@@ -22,6 +32,12 @@ type CodeBranch struct {
 	Commond string `db:"commond" json:"commond" form:"commond" binding:"required"`
 	// 本地仓库路径
 	RepoLocal string `db:"repo_local" json:"repoLocal" form:"repoLocal" binding:"required"`
+
+	// 代码信息
+	Message string `db:"message" json:"message"`
+
+	// 代码状态
+	Status int `db:"status" json:"status"`
 }
 
 type Machine struct {
