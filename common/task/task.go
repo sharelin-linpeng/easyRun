@@ -3,14 +3,15 @@ package task
 import (
 	"log"
 
-	"github.com/sharelin-linpeng/easyRun/application"
+	"github.com/sharelin-linpeng/easyRun/repository"
 )
 
 // 更新代码任务
 type UpdateCodeTask struct {
-	codeBranch *application.CodeBranch
+	codeBranch *repository.CodeBranch
 }
-func NewUpdateCodeTask(codeBranch *application.CodeBranch) *UpdateCodeTask {
+
+func NewUpdateCodeTask(codeBranch *repository.CodeBranch) *UpdateCodeTask {
 	task := UpdateCodeTask{codeBranch}
 	return &task
 }
@@ -23,10 +24,10 @@ func (updateCodeTask *UpdateCodeTask) process() error {
 
 // 构建代码任务
 type BuildCodeTask struct {
-	codeBranch *application.CodeBranch
+	codeBranch *repository.CodeBranch
 }
 
-func NewBuildCodeTask(codeBranch *application.CodeBranch) *BuildCodeTask {
+func NewBuildCodeTask(codeBranch *repository.CodeBranch) *BuildCodeTask {
 	task := BuildCodeTask{codeBranch}
 	return &task
 }
@@ -39,10 +40,10 @@ func (updateCodeTask *BuildCodeTask) process() error {
 
 // 发布应用任务
 type PublishAppTask struct {
-	publishInfo application.PublishBindingInfo
+	publishInfo repository.PublishBindingInfo
 }
 
-func NewPublishAppTask(publishInfo application.PublishBindingInfo) *PublishAppTask {
+func NewPublishAppTask(publishInfo repository.PublishBindingInfo) *PublishAppTask {
 	task := PublishAppTask{publishInfo}
 	return &task
 }
