@@ -6,23 +6,598 @@
 	},
 	"item": [
 		{
-			"name": "新增 应用",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "param",
-							"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
-							"type": "text"
-						}
-					]
+			"name": "应用维护",
+			"item": [
+				{
+					"name": "新增 应用",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "appName",
+									"value": "小猪快跑",
+									"type": "text"
+								},
+								{
+									"key": "appWorkPath",
+									"value": "猪窝",
+									"type": "text"
+								},
+								{
+									"key": "appFile",
+									"value": "猪窝.app",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/application/add"
+					},
+					"response": []
 				},
-				"url": "http://127.0.0.1:8888/application/add"
-			},
-			"response": []
+				{
+					"name": "查询 应用 ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/application/query/xzz"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 应用列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/application/query"
+					},
+					"response": []
+				},
+				{
+					"name": "更新 应用",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "appName",
+									"value": "快狗打车",
+									"type": "text"
+								},
+								{
+									"key": "appWorkPath",
+									"value": "狗窝",
+									"type": "text"
+								},
+								{
+									"key": "appFile",
+									"value": "真是够了",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/application/update"
+					},
+					"response": []
+				},
+				{
+					"name": "删除应用 ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/application/delete/xzz"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "机器维护",
+			"item": [
+				{
+					"name": "新增",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "ip",
+									"value": "127.0.0.1",
+									"type": "text"
+								},
+								{
+									"key": "loginName",
+									"value": "root",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "aaaa1111",
+									"type": "text"
+								},
+								{
+									"key": "env",
+									"value": "开发",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/machine/add"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/machine/query/xzz"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/machine/query"
+					},
+					"response": []
+				},
+				{
+					"name": "更新",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "ip",
+									"value": "127.0.0.1",
+									"type": "text"
+								},
+								{
+									"key": "loginName",
+									"value": "root",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "aaaa1111",
+									"type": "text"
+								},
+								{
+									"key": "env",
+									"value": "开发",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/machine/update"
+					},
+					"response": []
+				},
+				{
+					"name": "删除 ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/machine/delete/xzz"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "代码分支维护",
+			"item": [
+				{
+					"name": "新增",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "branchName",
+									"value": "没啥用的代码分支",
+									"type": "text"
+								},
+								{
+									"key": "gitUrl",
+									"value": "这是他的git地址",
+									"type": "text"
+								},
+								{
+									"key": "branch",
+									"value": "这是分支名称",
+									"type": "text"
+								},
+								{
+									"key": "dir",
+									"value": "代码放在这里",
+									"type": "text"
+								},
+								{
+									"key": "commond",
+									"value": "构建用的命令",
+									"type": "text"
+								},
+								{
+									"key": "repoLocal",
+									"value": "构建时的仓库地址",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/codeBranch/add"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/codeBranch/query/xzz"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/codeBranch/query"
+					},
+					"response": []
+				},
+				{
+					"name": "删除 ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/codeBranch/delete/xzz"
+					},
+					"response": []
+				},
+				{
+					"name": "更新",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "branchName",
+									"value": "有用的分支",
+									"type": "text"
+								},
+								{
+									"key": "gitUrl",
+									"value": "git地址是这个",
+									"type": "text"
+								},
+								{
+									"key": "branch",
+									"value": "很厉害的分支",
+									"type": "text"
+								},
+								{
+									"key": "dir",
+									"value": "放这里很安全",
+									"type": "text"
+								},
+								{
+									"key": "commond",
+									"value": "牛逼的命令",
+									"type": "text"
+								},
+								{
+									"key": "repoLocal",
+									"value": "神奇的本地仓库",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/codeBranch/update"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "发布规则维护",
+			"item": [
+				{
+					"name": "新增",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "applicationId",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "machineId",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "branchId",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "正常",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/publishInfo/add"
+					},
+					"response": []
+				},
+				{
+					"name": "更新",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "applicationId",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "machineId",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "branchId",
+									"value": "xzz",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "正常",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/publishInfo/update"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/publishInfo/query/xzz"
+					},
+					"response": []
+				},
+				{
+					"name": "查询 列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/publishInfo/query"
+					},
+					"response": []
+				},
+				{
+					"name": "删除 ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "param",
+									"value": "{\"id\":\"xzz\",\"appName\":\"小猪快跑\",\"appWorkPath\":\"猪窝\",\"appFile\":\"猪猪.app\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8888/codeBranch/publishInfo/xzz"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

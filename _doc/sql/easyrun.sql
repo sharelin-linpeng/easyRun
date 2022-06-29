@@ -13,6 +13,21 @@ CREATE TABLE `application` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Table structure for codebranch
+-- ----------------------------
+DROP TABLE IF EXISTS `codebranch`;
+CREATE TABLE `codebranch` (
+  `id` varchar(30) NOT NULL,
+  `branch_name` varchar(30) DEFAULT NULL,
+  `git_url` varchar(30) DEFAULT NULL,
+  `branch` varchar(30) DEFAULT NULL,
+  `dir` varchar(30) DEFAULT NULL,
+  `commond` varchar(30) DEFAULT NULL,
+  `repo_local` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
 -- Table structure for machine
 -- ----------------------------
 DROP TABLE IF EXISTS `machine`;
@@ -23,38 +38,6 @@ CREATE TABLE `machine` (
   `login_name` varchar(30) DEFAULT NULL,
   `password` varchar(30) DEFAULT NULL,
   `env` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- ----------------------------
--- Table structure for code_branch
--- ----------------------------
-DROP TABLE IF EXISTS `code_branch`;
-CREATE TABLE `code_branch` (
-  `id` varchar(30) NOT NULL,
-  `branch_name` varchar(30) DEFAULT NULL,
-  `git_url` varchar(30) DEFAULT NULL,
-  `branch` varchar(30) DEFAULT NULL,
-  `dir` varchar(30) DEFAULT NULL,
-  `commond` varchar(30) DEFAULT NULL,
-  `repo_local` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- ----------------------------
--- Table structure for code_branch
--- ----------------------------
-DROP TABLE IF EXISTS `code_branch`;
-CREATE TABLE `code_branch` (
-  `id` varchar(30) NOT NULL,
-  `branch_name` varchar(30) DEFAULT NULL,
-  `git_url` varchar(30) DEFAULT NULL,
-  `branch` varchar(30) DEFAULT NULL,
-  `dir` varchar(30) DEFAULT NULL,
-  `commond` varchar(30) DEFAULT NULL,
-  `repo_local` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

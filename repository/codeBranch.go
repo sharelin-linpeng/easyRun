@@ -24,7 +24,7 @@ func (codeBranchService) QueryList() ([]entity.CodeBranch, error) {
 
 // 根据ID查询
 func (codeBranchService) QueryById(id string) (*entity.CodeBranch, error) {
-	sqlStr := "SELECT id, branch_name, git_url,branch,dir,commond,repo_local FROM code_branch where id = ?"
+	sqlStr := "SELECT id, branch_name, git_url,branch,dir,commond,repo_local FROM codebranch where id = ?"
 
 	var codeBranch entity.CodeBranch
 	if err := db.DB.Get(&codeBranch, sqlStr, id); err != nil {
@@ -36,7 +36,7 @@ func (codeBranchService) QueryById(id string) (*entity.CodeBranch, error) {
 
 // 根据ID查询
 func (codeBranchService) Add(codeBranch entity.CodeBranch) error {
-	sqlStr := "INSERT INTO code_branch(id, branch_name, git_url,branch,dir,commond,repo_local) VALUE( ?, ?, ?, ?, ?, ?, ?)"
+	sqlStr := "INSERT INTO codebranch(id, branch_name, git_url,branch,dir,commond,repo_local) VALUE( ?, ?, ?, ?, ?, ?, ?)"
 	if _, err := db.DB.Exec(sqlStr, codeBranch.Id, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal); err != nil {
 		fmt.Printf("codeBranchService.Add(), err:%v\n", err)
 		return err
@@ -46,7 +46,7 @@ func (codeBranchService) Add(codeBranch entity.CodeBranch) error {
 
 // 更新
 func (codeBranchService) Update(codeBranch entity.CodeBranch) error {
-	sqlStr := "UPDATE  code_branch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?, repo_local=?  WHERE id = ?"
+	sqlStr := "UPDATE  codebranch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?, repo_local=?  WHERE id = ?"
 	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.Id); err != nil {
 		fmt.Printf("codeBranchService.Update(), err:%v\n", err)
 		return err
@@ -56,7 +56,7 @@ func (codeBranchService) Update(codeBranch entity.CodeBranch) error {
 
 // 删除
 func (codeBranchService) Delete(id string) error {
-	sqlStr := "DELETE  FROM code_branch  WHERE id = ?"
+	sqlStr := "DELETE  FROM codebranch  WHERE id = ?"
 	if _, err := db.DB.Exec(sqlStr, id); err != nil {
 		fmt.Printf("codeBranchService.Delete(%s), err:%v\n", id, err)
 		return err

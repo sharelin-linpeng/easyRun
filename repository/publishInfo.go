@@ -19,7 +19,7 @@ func (publishInfoService) QueryList() ([]entity.PublishBindingInfo, error) {
 		m.id machine_id, m.ip, m.login_name,m.password,m.env,
 		c.id branch_id, c.branch_name, c.git_url, c.branch, c.dir, c.commond, c.repo_local
 		FROM 
-		publishInfo p,application a,machine m,code_branch c
+		publishInfo p,application a,machine m,codebranch c
 		WHERE
 			p.application_id = a.id and
 			p.machine_id = m.id and
@@ -44,7 +44,7 @@ func (publishInfoService) QueryById(id string) (*entity.PublishBindingInfo, erro
 		m.id machine_id, m.ip, m.login_name,m.password,m.env,
 		c.id branch_id, c.branch_name, c.git_url, c.branch, c.dir, c.commond, c.repo_local
 		FROM 
-		publishInfo p,application a,machine m,code_branch c
+		publishInfo p,application a,machine m,codebranch c
 		WHERE
 			p.application_id = ? and
 			p.application_id = a.id and
