@@ -1,53 +1,53 @@
 package entity
 
 type Application struct {
-	Id          string `db:"id" json:"id"`
-	AppName     string `db:"app_name" json:"appName"`
-	AppWorkPath string `db:"app_workpath" json:"appWorkPath"`
-	AppFile     string `db:"app_file" json:"appFile"`
+	Id          string `db:"id" json:"id" form:"id" binding:"required"`
+	AppName     string `db:"app_name" json:"appName" form:"appName" binding:"required"`
+	AppWorkPath string `db:"app_workpath" json:"appWorkPath" form:"appWorkPath" binding:"required"`
+	AppFile     string `db:"app_file" json:"appFile" form:"appFile" binding:"required"`
 }
 
 type CodeBranch struct {
 	// ID
-	Id string `db:"id" json:"id"`
+	Id string `db:"id" json:"id" form:"id" binding:"required"`
 	// 分支名称
-	BranchName string `db:"branch_name" json:"branchName"`
+	BranchName string `db:"branch_name" json:"branchName" form:"branchName" binding:"required"`
 	// git地址
-	GitUrl string `db:"git_url" json:"gitUrl"`
+	GitUrl string `db:"git_url" json:"gitUrl" form:"gitUrl" binding:"required"`
 	// 分支名称
-	Branch string `db:"branch" json:"branch"`
+	Branch string `db:"branch" json:"branch" form:"branch" binding:"required"`
 	// 代码存储路径
-	Dir string `db:"dir" json:"dir"`
+	Dir string `db:"dir" json:"dir" form:"dir" binding:"required"`
 	// 构建命令
-	Commond string `db:"commond" json:"commond"`
+	Commond string `db:"commond" json:"commond" form:"commond" binding:"required"`
 	// 本地仓库路径
-	RepoLocal string `db:"repo_local" json:"repoLocal"`
+	RepoLocal string `db:"repo_local" json:"repoLocal" form:"repoLocal" binding:"required"`
 }
 
 type Machine struct {
 	// ID
-	Id string `db:"id" json:"id"`
+	Id string `db:"id" json:"id" form:"id" binding:"required"`
 	// 机器ID
-	Ip string `db:"ip" json:"ip"`
+	Ip string `db:"ip" json:"ip" form:"ip" binding:"required"`
 	// 登录名称
-	LoginName string `db:"login_name" json:"loginName"`
+	LoginName string `db:"login_name" json:"loginName" form:"loginName" binding:"required"`
 	// 登录密码
-	Password string `db:"password" json:"password"`
+	Password string `db:"password" json:"password" form:"password" binding:"required"`
 	// 机器环境
-	Env string `db:"env" json:"env"`
+	Env string `db:"env" json:"env" form:"env" binding:"required"`
 }
 
 type PublishInfo struct {
 	// ID
-	Id string `db:"id" json:"id"`
+	Id string `db:"id" json:"id" form:"id" binding:"required"`
 	// 应用ID
-	ApplicationId string `db:"application_id" json:"applicationId"`
+	ApplicationId string `db:"application_id" json:"applicationId" form:"applicationId" binding:"required"`
 	// 机器ID
-	MachineId string `db:"machine_id" json:"machineId"`
+	MachineId string `db:"machine_id" json:"machineId" form:"machineId" binding:"required"`
 	// 关联分支
-	BranchId string `db:"branch_id" json:"branchId"`
+	BranchId string `db:"branch_id" json:"branchId" form:"branchId" binding:"required"`
 	// 状态
-	Status string `db:"status" json:"status"`
+	Status string `db:"status" json:"status" form:"status" binding:"required"`
 }
 
 type PublishBindingInfo struct {
@@ -84,4 +84,6 @@ type PublishBindingInfo struct {
 	Password string `db:"password" json:"password"`
 	// 机器环境
 	Env string `db:"env" json:"env"`
+	// 状态
+	Status string `db:"status" json:"status"`
 }

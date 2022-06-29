@@ -1,18 +1,6 @@
-package controller
+package server
 
-import (
-	"github.com/gin-gonic/gin"
-	"github.com/sharelin-linpeng/easyRun/common/jsonutil"
-	"github.com/sharelin-linpeng/easyRun/entity"
-	"github.com/sharelin-linpeng/easyRun/repository"
-)
-
-func InitHttpServer(port string) *gin.Engine {
-	router := gin.Default()
-	router.POST("/application/add", addApplication)
-	router.Run(":" + port)
-	return router
-}
+import "github.com/gin-gonic/gin"
 
 const (
 	SUCCESS = 0
@@ -48,14 +36,8 @@ func CreateError(c *gin.Context, message string) {
 	c.JSON(200, receiver)
 }
 
-func addApplication(c *gin.Context) {
-	param := c.PostForm("param")
-	app := entity.Application{}
-	jsonutil.Json2Obj(param, &app)
-	if err := repository.ApplicationService.Add(app); err != nil {
-		CreateError(c, err.Error())
-	} else {
-		CreateSuccess(c, "添加应用成功")
-	}
+var GIN_ROUTER = gin.Default()
 
+func InitHttpServer(port string) {
+	GIN_ROUTER.Run(":" + port)
 }
