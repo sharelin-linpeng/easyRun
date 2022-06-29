@@ -2,7 +2,8 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sharelin-linpeng/easyRun/jsonutil"
+	"github.com/sharelin-linpeng/easyRun/common/jsonutil"
+	"github.com/sharelin-linpeng/easyRun/entity"
 	"github.com/sharelin-linpeng/easyRun/repository"
 )
 
@@ -49,7 +50,7 @@ func CreateError(c *gin.Context, message string) {
 
 func addApplication(c *gin.Context) {
 	param := c.PostForm("param")
-	app := repository.Application{}
+	app := entity.Application{}
 	jsonutil.Json2Obj(param, &app)
 	if err := repository.ApplicationService.Add(app); err != nil {
 		CreateError(c, err.Error())

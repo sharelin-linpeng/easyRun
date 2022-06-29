@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/sharelin-linpeng/easyRun/jsonutil"
+	"github.com/sharelin-linpeng/easyRun/common/jsonutil"
 	"gopkg.in/yaml.v2"
 )
 

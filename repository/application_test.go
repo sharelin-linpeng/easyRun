@@ -4,15 +4,16 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/sharelin-linpeng/easyRun/config"
-	"github.com/sharelin-linpeng/easyRun/db"
-	"github.com/sharelin-linpeng/easyRun/jsonutil"
+	"github.com/sharelin-linpeng/easyRun/common/config"
+	"github.com/sharelin-linpeng/easyRun/common/db"
+	"github.com/sharelin-linpeng/easyRun/common/jsonutil"
+	"github.com/sharelin-linpeng/easyRun/entity"
 )
 
 func TestApplicationInsert(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
-	app := Application{}
+	app := entity.Application{}
 	app.Id = "123"
 	app.AppName = "小zz"
 	app.AppWorkPath = "猪窝"

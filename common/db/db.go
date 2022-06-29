@@ -5,7 +5,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"github.com/sharelin-linpeng/easyRun/config"
+	"github.com/sharelin-linpeng/easyRun/common/config"
 )
 
 var DB *sqlx.DB
