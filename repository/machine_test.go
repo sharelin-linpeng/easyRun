@@ -25,14 +25,14 @@ func TestMachineInsert(t *testing.T) {
 func TestMachineQueryId(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
-	app := MachineService.QueryById("123")
+	app, _ := MachineService.QueryById("123")
 	fmt.Println(jsonutil.Obj2Json(app))
 }
 
 func TestMachineQueryList(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
-	applist := MachineService.QueryList()
+	applist, _ := MachineService.QueryList()
 	fmt.Println(jsonutil.Obj2Json(applist))
 }
 
