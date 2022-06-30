@@ -26,6 +26,12 @@ type CodeBranch struct {
 	GitUrl string `db:"git_url" json:"gitUrl" form:"gitUrl" binding:"required"`
 	// 分支名称
 	Branch string `db:"branch" json:"branch" form:"branch" binding:"required"`
+
+	// 本地仓库路径
+	User string `db:"user" json:"user" form:"user" binding:"required"`
+
+	// 本地仓库路径
+	Auth string `db:"auth" json:"auth" form:"auth" binding:"required"`
 	// 代码存储路径
 	Dir string `db:"dir" json:"dir" form:"dir" binding:"required"`
 	// 构建命令
