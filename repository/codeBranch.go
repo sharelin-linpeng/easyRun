@@ -3,6 +3,7 @@ package repository
 import (
 	"fmt"
 
+	"github.com/sharelin-linpeng/easyRun/common/aes"
 	"github.com/sharelin-linpeng/easyRun/common/db"
 	"github.com/sharelin-linpeng/easyRun/entity"
 )
@@ -36,6 +37,8 @@ func (codeBranchService) QueryById(id string) (*entity.CodeBranch, error) {
 
 // 根据ID查询
 func (codeBranchService) Add(codeBranch entity.CodeBranch) error {
+	codeBranch.Auth, _ = aes.EnPwdCode([]byte(codeBranch.Auth))
+	codeBranch.User, _ = aes.EnPwdCode([]byte(codeBranch.User))
 	sqlStr := "INSERT INTO codebranch(id, branch_name, git_url,branch,dir,commond,repo_local) VALUE( ?, ?, ?, ?, ?, ?, ?)"
 	if _, err := db.DB.Exec(sqlStr, codeBranch.Id, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal); err != nil {
 		fmt.Printf("codeBranchService.Add(), err:%v\n", err)
@@ -47,6 +50,8 @@ func (codeBranchService) Add(codeBranch entity.CodeBranch) error {
 // 更新
 func (codeBranchService) Update(codeBranch entity.CodeBranch) error {
 	sqlStr := "UPDATE  codebranch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?, repo_local=?  WHERE id = ?"
+	codeBranch.Auth, _ = aes.EnPwdCode([]byte(codeBranch.Auth))
+	codeBranch.User, _ = aes.EnPwdCode([]byte(codeBranch.User))
 	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.Id); err != nil {
 		fmt.Printf("codeBranchService.Update(), err:%v\n", err)
 		return err
