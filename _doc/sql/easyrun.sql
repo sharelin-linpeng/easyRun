@@ -22,6 +22,8 @@ CREATE TABLE `codebranch` (
   `git_url` varchar(30) DEFAULT NULL,
   `branch` varchar(30) DEFAULT NULL,
   `dir` varchar(30) DEFAULT NULL,
+  `user` varchar(30) DEFAULT NULL,
+  `auth` varchar(30) DEFAULT NULL,
   `commond` varchar(30) DEFAULT NULL,
   `repo_local` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
