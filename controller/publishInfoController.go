@@ -8,11 +8,11 @@ import (
 )
 
 func InitPubishInfoRouter() {
-	server.GIN_ROUTER.POST("/publishInfo/add", addPubishInfo)
-	server.GIN_ROUTER.GET("/publishInfo/query/:id", findPubishInfoById)
-	server.GIN_ROUTER.GET("/publishInfo/query", findPubishInfoList)
-	server.GIN_ROUTER.POST("/publishInfo/update", updatePubishInfo)
-	server.GIN_ROUTER.DELETE("/publishInfo/delete/:id", deletePubishInfo)
+	server.GIN_ROUTER.POST("/publishInfo", addPubishInfo)
+	server.GIN_ROUTER.GET("/publishInfo/:id", findPubishInfoById)
+	server.GIN_ROUTER.GET("/publishInfo", findPubishInfoList)
+	server.GIN_ROUTER.PUT("/publishInfo/:id", updatePubishInfo)
+	server.GIN_ROUTER.DELETE("/publishInfo/:id", deletePubishInfo)
 
 }
 
@@ -58,7 +58,7 @@ func updatePubishInfo(c *gin.Context) {
 	if err := c.ShouldBind(&app); err != nil {
 		server.CreateError(c, "参数异常")
 	}
-
+	app.Id = c.Param("id")
 	if err := repository.PublishInfoService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
 	} else {

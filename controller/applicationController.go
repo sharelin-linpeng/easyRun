@@ -8,10 +8,10 @@ import (
 )
 
 func InitApplicationRouter() {
-	server.GIN_ROUTER.POST("/application/add", addApplication)
-	server.GIN_ROUTER.GET("/application/query/:id", findApplication)
-	server.GIN_ROUTER.GET("/application/query", findApplicationList)
-	server.GIN_ROUTER.POST("/application/update", updateApplication)
+	server.GIN_ROUTER.POST("/application", addApplication)
+	server.GIN_ROUTER.GET("/application/:id", findApplication)
+	server.GIN_ROUTER.GET("/application", findApplicationList)
+	server.GIN_ROUTER.PUT("/application/:id", updateApplication)
 	server.GIN_ROUTER.DELETE("/application/delete/:id", deleteApplication)
 
 }
@@ -55,11 +55,12 @@ func findApplicationList(c *gin.Context) {
 
 // 更新应用
 func updateApplication(c *gin.Context) {
+	id := c.Param("id")
 	app := entity.Application{}
 	if err := c.ShouldBind(&app); err != nil {
 		server.CreateError(c, "参数异常")
 	}
-
+	app.Id = id
 	if err := repository.ApplicationService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
 	} else {

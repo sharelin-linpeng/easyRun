@@ -8,11 +8,11 @@ import (
 )
 
 func InitCodeBranchRouter() {
-	server.GIN_ROUTER.POST("/codeBranch/add", addCodeBranch)
-	server.GIN_ROUTER.GET("/codeBranch/query/:id", findCodeBranchById)
-	server.GIN_ROUTER.GET("/codeBranch/query", findCodeBranchList)
-	server.GIN_ROUTER.POST("/codeBranch/update", updateCodeBranch)
-	server.GIN_ROUTER.DELETE("/codeBranch/delete/:id", deleteCodeBranch)
+	server.GIN_ROUTER.POST("/codeBranch", addCodeBranch)
+	server.GIN_ROUTER.GET("/codeBranch/:id", findCodeBranchById)
+	server.GIN_ROUTER.GET("/codeBranch", findCodeBranchList)
+	server.GIN_ROUTER.PUT("/codeBranch/:id", updateCodeBranch)
+	server.GIN_ROUTER.DELETE("/codeBranch/:id", deleteCodeBranch)
 
 }
 
@@ -58,6 +58,8 @@ func updateCodeBranch(c *gin.Context) {
 	if err := c.ShouldBind(&app); err != nil {
 		server.CreateError(c, "参数异常")
 	}
+	id := c.Param("id")
+	app.Id = id
 
 	if err := repository.CodeBranchService.Update(app); err != nil {
 		server.CreateError(c, err.Error())

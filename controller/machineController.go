@@ -8,11 +8,11 @@ import (
 )
 
 func InitMachineRouter() {
-	server.GIN_ROUTER.POST("/machine/add", addMachine)
-	server.GIN_ROUTER.GET("/machine/query/:id", findMachineById)
-	server.GIN_ROUTER.GET("/machine/query", findMachineList)
-	server.GIN_ROUTER.POST("/machine/update", updateMachine)
-	server.GIN_ROUTER.DELETE("/machine/delete/:id", deleteMachine)
+	server.GIN_ROUTER.POST("/machine", addMachine)
+	server.GIN_ROUTER.GET("/machine/:id", findMachineById)
+	server.GIN_ROUTER.GET("/machine", findMachineList)
+	server.GIN_ROUTER.PUT("/machine/:id", updateMachine)
+	server.GIN_ROUTER.DELETE("/machine/:id", deleteMachine)
 
 }
 
@@ -58,6 +58,8 @@ func updateMachine(c *gin.Context) {
 	if err := c.ShouldBind(&app); err != nil {
 		server.CreateError(c, "参数异常")
 	}
+	id := c.Param("id")
+	app.Id = id
 
 	if err := repository.MachineService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
