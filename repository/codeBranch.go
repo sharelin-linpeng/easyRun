@@ -39,8 +39,10 @@ func (codeBranchService) QueryById(id string) (*entity.CodeBranch, error) {
 func (codeBranchService) Add(codeBranch entity.CodeBranch) error {
 	codeBranch.Auth, _ = aes.EnPwdCode([]byte(codeBranch.Auth))
 	codeBranch.User, _ = aes.EnPwdCode([]byte(codeBranch.User))
-	sqlStr := "INSERT INTO codebranch(id, branch_name, git_url,branch,dir,commond,repo_local,user,auth,message,status) VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-	if _, err := db.DB.Exec(sqlStr, codeBranch.Id, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.User, codeBranch.Auth, codeBranch.Message, codeBranch.Status); err != nil {
+	codeBranch.Message = ""
+	codeBranch.Status = int(entity.CODE_BRANCH_NOT_INIT)
+	sqlStr := "INSERT INTO codebranch( branch_name, git_url,branch,dir,commond,repo_local,user,auth,message,status) VALUE( ?, ?, ?, ?, ?, ?, ?, ?,?,?)"
+	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.User, codeBranch.Auth, codeBranch.Message, codeBranch.Status); err != nil {
 		fmt.Printf("codeBranchService.Add(), err:%v\n", err)
 		return err
 	}
@@ -49,18 +51,23 @@ func (codeBranchService) Add(codeBranch entity.CodeBranch) error {
 
 // 更新
 func (codeBranchService) Update(codeBranch entity.CodeBranch) error {
-	sqlStr := "UPDATE  codebranch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?, repo_local=?, user=?, auth=?, message=?, status=?  WHERE id = ?"
+	sqlStr := "UPDATE  codebranch SET branch_name = ?, git_url = ?, branch = ?, dir = ?, commond=?, repo_local=?, user=?, auth=?  WHERE id = ?"
 	codeBranch.Auth, _ = aes.EnPwdCode([]byte(codeBranch.Auth))
 	codeBranch.User, _ = aes.EnPwdCode([]byte(codeBranch.User))
-	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.User, codeBranch.Auth, codeBranch.Message, codeBranch.Status, codeBranch.Id); err != nil {
+	if _, err := db.DB.Exec(sqlStr, codeBranch.BranchName, codeBranch.GitUrl, codeBranch.Branch, codeBranch.Dir, codeBranch.Commond, codeBranch.RepoLocal, codeBranch.User, codeBranch.Auth, codeBranch.Id); err != nil {
 		fmt.Printf("codeBranchService.Update(), err:%v\n", err)
 		return err
 	}
 	return nil
 }
 
-func (codeBranchService) UpdateStatus(codeBranch entity.CodeBranch) error {
-
+func (codeBranchService) UpdateStatus(id string, massage string, status int) error {
+	sqlStr := "UPDATE  codebranch SET message=?, status=?  WHERE id = ?"
+	if _, err := db.DB.Exec(sqlStr, massage, status, id); err != nil {
+		fmt.Printf("UpdateStatus.Update(), err:%v\n", err)
+		return err
+	}
+	return nil
 }
 
 // 删除

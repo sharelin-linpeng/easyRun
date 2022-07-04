@@ -19,7 +19,7 @@ const (
 type CodeBranch struct {
 
 	// ID
-	Id string `db:"id" json:"id" form:"id" binding:"required"`
+	Id int `db:"id" json:"id" form:"id"`
 	// 分支名称
 	BranchName string `db:"branch_name" json:"branchName" form:"branchName" binding:"required"`
 	// git地址
@@ -28,10 +28,10 @@ type CodeBranch struct {
 	Branch string `db:"branch" json:"branch" form:"branch" binding:"required"`
 
 	// 本地仓库路径
-	User string `db:"user" json:"user" form:"user" binding:"required"`
+	User string `db:"user" json:"user" form:"user"`
 
 	// 本地仓库路径
-	Auth string `db:"auth" json:"auth" form:"auth" binding:"required"`
+	Auth string `db:"auth" json:"auth" form:"auth"`
 	// 代码存储路径
 	Dir string `db:"dir" json:"dir" form:"dir" binding:"required"`
 	// 构建命令

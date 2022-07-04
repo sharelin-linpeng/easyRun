@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/server"
@@ -10,11 +11,11 @@ import (
 )
 
 func InitCodeBranchRouter() {
-	server.GIN_ROUTER.POST("/codeBranch", addCodeBranch)
-	server.GIN_ROUTER.GET("/codeBranch/:id", findCodeBranchById)
-	server.GIN_ROUTER.GET("/codeBranch", findCodeBranchList)
-	server.GIN_ROUTER.PUT("/codeBranch/:id", updateCodeBranch)
-	server.GIN_ROUTER.DELETE("/codeBranch/:id", deleteCodeBranch)
+	server.GIN_ROUTER.POST("/api/codeBranch", addCodeBranch)
+	server.GIN_ROUTER.GET("/api/codeBranch/:id", findCodeBranchById)
+	server.GIN_ROUTER.GET("/api/codeBranch", findCodeBranchList)
+	server.GIN_ROUTER.PUT("/api/codeBranch/:id", updateCodeBranch)
+	server.GIN_ROUTER.DELETE("/api/codeBranch/:id", deleteCodeBranch)
 
 }
 
@@ -65,7 +66,7 @@ func updateCodeBranch(c *gin.Context) {
 		return
 	}
 	id := c.Param("id")
-	app.Id = id
+	app.Id, _ = strconv.Atoi(id)
 
 	if err := repository.CodeBranchService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
