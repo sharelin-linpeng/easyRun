@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/server"
 	"github.com/sharelin-linpeng/easyRun/entity"
@@ -19,13 +21,15 @@ func InitCodeBranchRouter() {
 func addCodeBranch(c *gin.Context) {
 	param := entity.CodeBranch{}
 	if err := c.ShouldBind(&param); err != nil {
+		log.Printf("addCodeBranch acc err %v\n", err)
 		server.CreateError(c, "参数异常")
+		return
 	}
 	if err := repository.CodeBranchService.Add(param); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccess(c, "添加成功")
+		return
 	}
+	server.CreateSuccess(c, "添加成功")
 
 }
 
@@ -35,9 +39,9 @@ func findCodeBranchById(c *gin.Context) {
 	app, err := repository.CodeBranchService.QueryById(id)
 	if err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "查询成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "查询成功", app)
 
 }
 
@@ -46,9 +50,9 @@ func findCodeBranchList(c *gin.Context) {
 	app, err := repository.CodeBranchService.QueryList()
 	if err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "查询成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "查询成功", app)
 
 }
 
@@ -56,16 +60,18 @@ func findCodeBranchList(c *gin.Context) {
 func updateCodeBranch(c *gin.Context) {
 	app := entity.CodeBranch{}
 	if err := c.ShouldBind(&app); err != nil {
+		log.Printf("updateCodeBranch acc err %v\n", err)
 		server.CreateError(c, "参数异常")
+		return
 	}
 	id := c.Param("id")
 	app.Id = id
 
 	if err := repository.CodeBranchService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "修改成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "修改成功", app)
 
 }
 
@@ -74,8 +80,8 @@ func deleteCodeBranch(c *gin.Context) {
 	id := c.Param("id")
 	if err := repository.CodeBranchService.Delete(id); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccess(c, "删除成功")
+		return
 	}
+	server.CreateSuccess(c, "删除成功")
 
 }

@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/server"
 	"github.com/sharelin-linpeng/easyRun/entity"
@@ -19,13 +21,15 @@ func InitPubishInfoRouter() {
 func addPubishInfo(c *gin.Context) {
 	param := entity.PublishInfo{}
 	if err := c.ShouldBind(&param); err != nil {
+		log.Printf("addPubishInfo acc err %v\n", err)
 		server.CreateError(c, "参数异常")
+		return
 	}
 	if err := repository.PublishInfoService.Add(param); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccess(c, "添加成功")
+		return
 	}
+	server.CreateSuccess(c, "添加成功")
 
 }
 
@@ -35,9 +39,10 @@ func findPubishInfoById(c *gin.Context) {
 	app, err := repository.PublishInfoService.QueryById(id)
 	if err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "查询成功", app)
+		return
 	}
+
+	server.CreateSuccessData(c, "查询成功", app)
 
 }
 
@@ -46,9 +51,9 @@ func findPubishInfoList(c *gin.Context) {
 	app, err := repository.PublishInfoService.QueryList()
 	if err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "查询成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "查询成功", app)
 
 }
 
@@ -56,14 +61,16 @@ func findPubishInfoList(c *gin.Context) {
 func updatePubishInfo(c *gin.Context) {
 	app := entity.PublishInfo{}
 	if err := c.ShouldBind(&app); err != nil {
+		log.Printf("updatePubishInfo acc err %v\n", err)
 		server.CreateError(c, "参数异常")
+		return
 	}
 	app.Id = c.Param("id")
 	if err := repository.PublishInfoService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "修改成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "修改成功", app)
 
 }
 
@@ -72,8 +79,8 @@ func deletePubishInfo(c *gin.Context) {
 	id := c.Param("id")
 	if err := repository.PublishInfoService.Delete(id); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccess(c, "删除成功")
+		return
 	}
+	server.CreateSuccess(c, "删除成功")
 
 }

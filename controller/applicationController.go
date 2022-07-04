@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/server"
 	"github.com/sharelin-linpeng/easyRun/entity"
@@ -12,7 +14,7 @@ func InitApplicationRouter() {
 	server.GIN_ROUTER.GET("/application/:id", findApplication)
 	server.GIN_ROUTER.GET("/application", findApplicationList)
 	server.GIN_ROUTER.PUT("/application/:id", updateApplication)
-	server.GIN_ROUTER.DELETE("/application/delete/:id", deleteApplication)
+	server.GIN_ROUTER.DELETE("/application/:id", deleteApplication)
 
 }
 
@@ -20,13 +22,15 @@ func InitApplicationRouter() {
 func addApplication(c *gin.Context) {
 	app := entity.Application{}
 	if err := c.ShouldBind(&app); err != nil {
+		log.Printf("addApplication acc err %v\n", err)
 		server.CreateError(c, "参数异常")
+		return
 	}
 	if err := repository.ApplicationService.Add(app); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccess(c, "添加应用成功")
+		return
 	}
+	server.CreateSuccess(c, "添加应用成功")
 
 }
 
@@ -36,9 +40,9 @@ func findApplication(c *gin.Context) {
 	app, err := repository.ApplicationService.QueryById(id)
 	if err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "查询成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "查询成功", app)
 
 }
 
@@ -47,9 +51,9 @@ func findApplicationList(c *gin.Context) {
 	app, err := repository.ApplicationService.QueryList()
 	if err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "查询成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "查询成功", app)
 
 }
 
@@ -58,14 +62,16 @@ func updateApplication(c *gin.Context) {
 	id := c.Param("id")
 	app := entity.Application{}
 	if err := c.ShouldBind(&app); err != nil {
+		log.Printf("updateApplication acc err %v\n", err)
 		server.CreateError(c, "参数异常")
+		return
 	}
 	app.Id = id
 	if err := repository.ApplicationService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccessData(c, "修改成功", app)
+		return
 	}
+	server.CreateSuccessData(c, "修改成功", app)
 
 }
 
@@ -74,8 +80,8 @@ func deleteApplication(c *gin.Context) {
 	id := c.Param("id")
 	if err := repository.ApplicationService.Delete(id); err != nil {
 		server.CreateError(c, err.Error())
-	} else {
-		server.CreateSuccess(c, "删除成功")
+		return
 	}
+	server.CreateSuccess(c, "删除成功")
 
 }

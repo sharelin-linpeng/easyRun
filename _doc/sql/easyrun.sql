@@ -26,6 +26,8 @@ CREATE TABLE `codebranch` (
   `auth` varchar(30) DEFAULT NULL,
   `commond` varchar(30) DEFAULT NULL,
   `repo_local` varchar(30) DEFAULT NULL,
+  `message` varchar(30) DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
