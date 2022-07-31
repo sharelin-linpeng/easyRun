@@ -109,3 +109,52 @@ type PublishBindingInfo struct {
 	// 状态
 	Status string `db:"status" json:"status"`
 }
+
+const (
+	// 任务容器
+	CONTAINER = "CONTAINER"
+	// 更新代码
+	UPDATE_CODE = "UPDATE_CODE"
+	// 构建代码
+	BUILD_CODE = "BUILD_CODE"
+	// 发布应用
+	PUBLISH_APP = "PUBLISH_APP"
+)
+
+type Task struct {
+	// ID
+	Id string `db:"id" json:"id"`
+	// 任务父ID
+	ParentId string `db:"parent_id" json:"parentId"`
+	// 执行顺序
+	Sequence int `db:"sequence" json:"sequence"`
+	// 任务类型
+	Type string `db:"type" json:"type"`
+}
+
+type UpdateCodeTask struct {
+	// ID
+	Id string `db:"id" json:"id"`
+	// 代码仓库编号
+	CodeBranchId string `db:"code_branch_id" json:"codeBranchId"`
+}
+
+type BuildCodeTask struct {
+	// ID
+	Id string `db:"id" json:"id"`
+	// 代码仓库编号
+	CodeBranchId string `db:"code_branch_id" json:"codeBranchId"`
+	// 构建路径
+	BuildPath string `db:"build_path" json:"buildPath"`
+}
+
+type PublishAppTask struct {
+	// ID
+	Id string `db:"id" json:"id"`
+	// 代码仓库编号
+	CodeBranchId string `db:"code_branch_id" json:"codeBranchId"`
+	// 应用Id
+	AppId string `db:"app_id" json:"appId"`
+	// 机器ID
+	MachineId string `db:"machine_id" json:"machineId"`
+}
