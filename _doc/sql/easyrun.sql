@@ -63,44 +63,18 @@ CREATE TABLE `publishInfo` (
 -- ----------------------------
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
-  `id` varchar(30) NOT NULL,
+  `id` bigint NOT NULL,
+  `name` varchar(30) NOT NULL,
   `parentId` varchar(30) DEFAULT NULL,
-  `sequence` varchar(30) DEFAULT NULL,
+  `sequence` int DEFAULT NULL,
   `type` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- ----------------------------
--- Table structure for updateCodeTask
--- ----------------------------
-DROP TABLE IF EXISTS `updateCodeTask`;
-CREATE TABLE `updateCodeTask` (
-  `id` varchar(30) NOT NULL,
-  `code_branch_id` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Table structure for buildCodeTask
--- ----------------------------
-DROP TABLE IF EXISTS `buildCodeTask`;
-CREATE TABLE `buildCodeTask` (
-  `id` varchar(30) NOT NULL,
   `code_branch_id` varchar(30) DEFAULT NULL,
   `build_path` varchar(100) DEFAULT NULL,
+  `app_id` varchar(30) DEFAULT NULL,
+  `machine_id` varchar(30) DEFAULT NULL,
+  `status` int DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ----------------------------
--- Table structure for PublishAppTask
--- ----------------------------
-DROP TABLE IF EXISTS `publishAppTask`;
-CREATE TABLE `publishAppTask` (
-  `id` varchar(30) NOT NULL,
-  `code_branch_id` varchar(30) DEFAULT NULL,
-  `app_id` varchar(30) DEFAULT NULL,
-  `machine_id` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
