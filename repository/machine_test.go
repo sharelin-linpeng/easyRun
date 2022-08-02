@@ -14,7 +14,7 @@ func TestMachineInsert(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
 	app := entity.Machine{}
-	app.Id = "123"
+	app.Id = 111
 	app.Ip = "127.0.0.1"
 	app.LoginName = "aaa"
 	app.Password = "aaa111"

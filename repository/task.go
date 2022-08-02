@@ -11,7 +11,7 @@ type taskService struct {
 }
 
 // 自定义任务
-func (taskService) QueryList() ([]entity.Task, error) {
+func (taskService) QueryList() ([]entity.TaskVo, error) {
 	sqlStr := `
 	SELECT 
 		id,
@@ -30,12 +30,58 @@ func (taskService) QueryList() ([]entity.Task, error) {
 		fmt.Printf("taskService.QueryList, err:%v\n", err)
 		return nil, err
 	}
-	return dataList, nil
+
+	taskVo := make([]entity.TaskVo, 0)
+	for _, data := range dataList {
+		task := entity.TaskVo{}
+		task.Id = data.Id
+		task.Name = data.Name
+		childTaskList := make([]interface{}, 0)
+		// 获取子任务
+		if childTasks, err := TaskService.QueryById(data.Id); err != nil && childTasks != nil {
+			for _, childTask := range childTasks {
+				if childTask.Type == entity.UPDATE_CODE {
+
+					// 查询分支信息
+					if codeBranch, err := CodeBranchService.QueryById(childTask.CodeBranchId); err != nil {
+						updateTask := entity.NewUpdateCodeTaskVo()
+						updateTask.BranchName = codeBranch.BranchName
+						updateTask.BranchId = codeBranch.Id
+						childTaskList = append(childTaskList, updateTask)
+					}
+
+				} else if childTask.Type == entity.BUILD_CODE {
+
+					// 查询分支信息
+					if codeBranch, err := CodeBranchService.QueryById(childTask.CodeBranchId); err != nil {
+						buildTask := entity.NewBuildCodeTaskVo()
+						buildTask.BranchId = codeBranch.Id
+						buildTask.BranchName = codeBranch.BranchName
+
+						if childTask.BuildPath == "" {
+							buildTask.BuildPath = codeBranch.Dir
+						} else {
+							buildTask.BuildPath = childTask.BuildPath
+						}
+						childTaskList = append(childTaskList, buildTask)
+					}
+
+				} else if childTask.Type == entity.PUBLISH_APP {
+					publishTask := entity.NewPublishAppTaskVo()
+
+					childTaskList = append(childTaskList, publishTask)
+				}
+			}
+		}
+		taskVo = append(taskVo, task)
+	}
+
+	return taskVo, nil
 
 }
 
 // 根据ID查询
-func (taskService) QueryById(id string) (*[]entity.Task, error) {
+func (taskService) QueryById(id int64) ([]entity.Task, error) {
 	sqlStr := `
 	SELECT 
 		id,
@@ -47,15 +93,15 @@ func (taskService) QueryById(id string) (*[]entity.Task, error) {
 		build_path,
 		app_id,
 		machine_id
-	FROM task WHERE parent_id = id order by sequence`
+	FROM task WHERE parent_id = ? order by sequence`
 
 	var data []entity.Task
 
-	if err := db.DB.Select(data, sqlStr); err != nil {
+	if err := db.DB.Select(data, sqlStr, id); err != nil {
 		fmt.Printf("taskService.QueryById(%s), err:%v\n", id, err)
 		return nil, err
 	}
-	return &data, nil
+	return data, nil
 }
 
 // 根据ID查询

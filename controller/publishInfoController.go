@@ -10,11 +10,11 @@ import (
 )
 
 func InitPubishInfoRouter() {
-	server.GIN_ROUTER.POST("/publishInfo", addPubishInfo)
-	server.GIN_ROUTER.GET("/publishInfo/:id", findPubishInfoById)
-	server.GIN_ROUTER.GET("/publishInfo", findPubishInfoList)
-	server.GIN_ROUTER.PUT("/publishInfo/:id", updatePubishInfo)
-	server.GIN_ROUTER.DELETE("/publishInfo/:id", deletePubishInfo)
+	server.GIN_ROUTER.POST("/api/publishInfo", addPubishInfo)
+	server.GIN_ROUTER.GET("/api/publishInfo/:id", findPubishInfoById)
+	server.GIN_ROUTER.GET("/api/publishInfo", findPubishInfoList)
+	server.GIN_ROUTER.PUT("/api/publishInfo/:id", updatePubishInfo)
+	server.GIN_ROUTER.DELETE("/api/publishInfo/:id", deletePubishInfo)
 
 }
 

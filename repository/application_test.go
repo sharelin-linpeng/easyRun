@@ -14,7 +14,7 @@ func TestApplicationInsert(t *testing.T) {
 	config.LoadConfigApp("../config.yaml")
 	db.InitMySQL()
 	app := entity.Application{}
-	app.Id = "123"
+	app.Id = 123
 	app.AppName = "小zz"
 	app.AppWorkPath = "猪窝"
 	app.AppFile = "胡萝卜"

@@ -1,7 +1,7 @@
 package entity
 
 type Application struct {
-	Id          string `db:"id" json:"id" form:"id" binding:"required"`
+	Id          int    `db:"id" json:"id" form:"id"`
 	AppName     string `db:"app_name" json:"appName" form:"appName" binding:"required"`
 	AppWorkPath string `db:"app_workpath" json:"appWorkPath" form:"appWorkPath" binding:"required"`
 	AppFile     string `db:"app_file" json:"appFile" form:"appFile" binding:"required"`
@@ -19,7 +19,7 @@ const (
 type CodeBranch struct {
 
 	// ID
-	Id int `db:"id" json:"id" form:"id"`
+	Id int64 `db:"id" json:"id" form:"id"`
 	// 分支名称
 	BranchName string `db:"branch_name" json:"branchName" form:"branchName" binding:"required"`
 	// git地址
@@ -48,7 +48,9 @@ type CodeBranch struct {
 
 type Machine struct {
 	// ID
-	Id string `db:"id" json:"id" form:"id" binding:"required"`
+	Id int64 `db:"id" json:"id" form:"id"`
+	// 机器名称
+	Name string `db:"name" json:"name" form:"name" binding:"required"`
 	// 机器ID
 	Ip string `db:"ip" json:"ip" form:"ip" binding:"required"`
 	// 登录名称
@@ -56,7 +58,7 @@ type Machine struct {
 	// 登录密码
 	Password string `db:"password" json:"password" form:"password" binding:"required"`
 	// 机器环境
-	Env string `db:"env" json:"env" form:"env" binding:"required"`
+	Env string `db:"env" json:"env" form:"env"`
 }
 
 type PublishInfo struct {
@@ -138,4 +140,62 @@ type Task struct {
 	AppId string `db:"app_id" json:"appId"`
 	// 机器ID
 	MachineId string `db:"machine_id" json:"machineId"`
+}
+
+type TaskVo struct {
+	Id       int64         `json:"id"`
+	Name     int64         `json:"name"`
+	TaskList []interface{} `json:"taskList"`
+}
+
+type UpdateCodeTaskVo struct {
+	Type string `json:"type"`
+	// ID
+	BranchId int64 `json:"branchId"`
+	// 分支名称
+	BranchName string `json:"branchName"`
+
+	Status string `json:"status"`
+}
+
+func NewUpdateCodeTaskVo() UpdateCodeTaskVo {
+	return UpdateCodeTaskVo{Type: UPDATE_CODE}
+}
+
+type BuildCodeTaskVo struct {
+	Type   string `json:"type"`
+	Status string `json:"status"`
+	// ID
+	BranchId int64 `json:"branchId"`
+	// 分支名称
+	BranchName string `json:"branchName"`
+	// 构建路径
+	BuildPath string `json:"buildPath"`
+}
+
+func NewBuildCodeTaskVo() BuildCodeTaskVo {
+	return BuildCodeTaskVo{Type: BUILD_CODE}
+}
+
+type PublishAppTaskVo struct {
+	Type string `json:"type"`
+
+	Status string `json:"status"`
+	// ID
+	BranchId string `json:"branchId"`
+	// 分支名称
+	BranchName string `json:"branchName"`
+	// appID
+	AppId       string `json:"appId"`
+	AppName     string `json:"appName"`
+	AppWorkPath string `json:"appWorkPath"`
+	AppFile     string `json:"appFile"`
+	// 机器名称
+	MachineName string `json:"machineName"`
+	// 机器ID
+	MachineIp string `json:"machineIp"`
+}
+
+func NewPublishAppTaskVo() PublishAppTaskVo {
+	return PublishAppTaskVo{Type: PUBLISH_APP}
 }

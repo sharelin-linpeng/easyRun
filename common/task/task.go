@@ -26,6 +26,7 @@ func NewInitCodeTask(codeBranch entity.CodeBranch) *InitCodeTask {
 func (initCodeTask *InitCodeTask) process() error {
 	// TODO 初始化分支代码
 	log.Println("初始化代码")
+
 	codeBranch := initCodeTask.codeBranch
 	user, _ := aes.DePwdCode(codeBranch.User)
 	pass, _ := aes.DePwdCode(codeBranch.Auth)
@@ -57,17 +58,16 @@ func NewUpdateCodeTask(codeBranch *entity.CodeBranch) *UpdateCodeTask {
 	return &task
 }
 
-func (updateCodeTask *UpdateCodeTask) resetStatus() {
-	updateCodeTask.codeBranch.Status = int(entity.CODE_BRANCH_OK)
-	repository.CodeBranchService.Update(*updateCodeTask.codeBranch)
-}
-
 func (updateCodeTask *UpdateCodeTask) process() error {
 	// TODO 更新分支代码
 	log.Println("更新代码")
 	codeBranch := updateCodeTask.codeBranch
 
-	defer updateCodeTask.resetStatus()
+	// 代码未初始化，执行初始化
+	if codeBranch.Status == int(entity.CODE_BRANCH_NOT_INIT) {
+		initCodeTask := NewInitCodeTask(*codeBranch)
+		initCodeTask.process()
+	}
 
 	r, err := git.PlainOpen(codeBranch.Dir)
 	if err != nil {

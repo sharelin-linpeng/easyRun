@@ -37,8 +37,8 @@ func (applicationService) QueryById(id string) (*entity.Application, error) {
 
 // 根据ID查询
 func (applicationService) Add(application entity.Application) error {
-	sqlStr := "INSERT INTO application(id, app_name, app_workpath,app_file) VALUE( ?, ?, ?, ?)"
-	if _, err := db.DB.Exec(sqlStr, application.Id, application.AppName, application.AppWorkPath, application.AppFile); err != nil {
+	sqlStr := "INSERT INTO application(app_name, app_workpath,app_file) VALUE( ?, ?, ?)"
+	if _, err := db.DB.Exec(sqlStr, application.AppName, application.AppWorkPath, application.AppFile); err != nil {
 		fmt.Printf("applicationService.Add(), err:%v\n", err)
 		return err
 	}

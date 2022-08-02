@@ -66,7 +66,7 @@ func updateCodeBranch(c *gin.Context) {
 		return
 	}
 	id := c.Param("id")
-	app.Id, _ = strconv.Atoi(id)
+	app.Id, _ = strconv.ParseInt(id, 10, 64)
 
 	if err := repository.CodeBranchService.Update(app); err != nil {
 		server.CreateError(c, err.Error())

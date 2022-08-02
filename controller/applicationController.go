@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/server"
@@ -10,11 +11,11 @@ import (
 )
 
 func InitApplicationRouter() {
-	server.GIN_ROUTER.POST("/application", addApplication)
-	server.GIN_ROUTER.GET("/application/:id", findApplication)
-	server.GIN_ROUTER.GET("/application", findApplicationList)
-	server.GIN_ROUTER.PUT("/application/:id", updateApplication)
-	server.GIN_ROUTER.DELETE("/application/:id", deleteApplication)
+	server.GIN_ROUTER.POST("/api/application", addApplication)
+	server.GIN_ROUTER.GET("/api/application/:id", findApplication)
+	server.GIN_ROUTER.GET("/api/application", findApplicationList)
+	server.GIN_ROUTER.PUT("/api/application/:id", updateApplication)
+	server.GIN_ROUTER.DELETE("/api/application/:id", deleteApplication)
 
 }
 
@@ -66,7 +67,7 @@ func updateApplication(c *gin.Context) {
 		server.CreateError(c, "参数异常")
 		return
 	}
-	app.Id = id
+	app.Id, _ = strconv.Atoi(id)
 	if err := repository.ApplicationService.Update(app); err != nil {
 		server.CreateError(c, err.Error())
 		return

@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/server"
@@ -10,11 +11,11 @@ import (
 )
 
 func InitMachineRouter() {
-	server.GIN_ROUTER.POST("/machine", addMachine)
-	server.GIN_ROUTER.GET("/machine/:id", findMachineById)
-	server.GIN_ROUTER.GET("/machine", findMachineList)
-	server.GIN_ROUTER.PUT("/machine/:id", updateMachine)
-	server.GIN_ROUTER.DELETE("/machine/:id", deleteMachine)
+	server.GIN_ROUTER.POST("/api/machine", addMachine)
+	server.GIN_ROUTER.GET("/api/machine/:id", findMachineById)
+	server.GIN_ROUTER.GET("/api/machine", findMachineList)
+	server.GIN_ROUTER.PUT("/api/machine/:id", updateMachine)
+	server.GIN_ROUTER.DELETE("/api/machine/:id", deleteMachine)
 
 }
 
@@ -64,7 +65,7 @@ func updateMachine(c *gin.Context) {
 		server.CreateError(c, "参数异常")
 	}
 	id := c.Param("id")
-	app.Id = id
+	app.Id, _ = strconv.ParseInt(id, 10, 64)
 
 	if err := repository.MachineService.Update(app); err != nil {
 		server.CreateError(c, err.Error())

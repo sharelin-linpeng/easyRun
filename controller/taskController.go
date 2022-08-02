@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sharelin-linpeng/easyRun/common/id"
@@ -90,7 +91,7 @@ func addTask(c *gin.Context) {
 
 // 查找 byId
 func findTaskById(c *gin.Context) {
-	id := c.Param("id")
+	id, _ := strconv.ParseInt(c.Param("id"), 10, 64)
 
 	app, err := repository.TaskService.QueryById(id)
 	if err != nil {
